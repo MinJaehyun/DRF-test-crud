@@ -1,11 +1,11 @@
 from django.urls import path
 
 from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
+from . import MixinViews
 
 urlpatterns =[
-    path('blog/', views.blog_list),
-    path('blog/<int:pk>/', views.blog_detail),
+    path('blog/', MixinViews.BlogList.as_view()),
+    path('blog/<int:pk>/', MixinViews.BlogDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
