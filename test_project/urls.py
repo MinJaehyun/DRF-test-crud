@@ -8,4 +8,5 @@ urlpatterns = [
     # path('', include('projectapp.ViewSetUrls.routerUrls')),
     # path('', include('projectapp.ViewSetUrls.AsViewUrls')),
     path('user/', include('accountapp.urls')),
+    path('article/', include('articleapp.urls')),
 ]
