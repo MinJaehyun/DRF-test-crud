@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-from projectapp import urls
+from projectapp.ViewSetUrls import routerUrls
+from projectapp.ViewSetUrls import AsViewUrls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('projectapp.urls')),
+    # path('', include('projectapp.ViewSetUrls.routerUrls')),
+    path('', include('projectapp.ViewSetUrls.AsViewUrls')),
 ]
