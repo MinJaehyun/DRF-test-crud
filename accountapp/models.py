@@ -17,6 +17,7 @@ class UserManager(BaseUserManager):
       name     = name
     )
     user.set_password(password)
+    user.is_stuff = False
     user.save(using=self._db)
     return user
 
@@ -29,6 +30,8 @@ class UserManager(BaseUserManager):
       name     = name
     )
     user.is_admin = True
+    user.is_staff = True
+    user.is_superuser = True
     user.save(using=self._db)
     return user
 
@@ -42,6 +45,8 @@ class User(AbstractBaseUser):
   # User 모델의 필수 field
   is_active = models.BooleanField(default=True)
   is_admin  = models.BooleanField(default=False)
+  is_staff = models.BooleanField(default=False)
+  is_superuser = models.BooleanField(default=False)
 
   # 헬퍼 클래스 사용
   objects = UserManager()
@@ -50,6 +55,11 @@ class User(AbstractBaseUser):
   USERNAME_FIELD  = 'nickname'
   # 필수로 작성해야하는 field
   REQUIRED_FIELDS = ['email', 'name']
+
+  def has_perm(self, perm, obj=None):
+    return self.is_superuser
+  def has_module_perms(self, app_label):
+    return self.is_superuser
 
   def __str__(self):
     return self.nickname
